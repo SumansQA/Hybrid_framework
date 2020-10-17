@@ -10,5 +10,4 @@ public class Utilities {
 	{
 		return (String)((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);	
 	}
-
 }

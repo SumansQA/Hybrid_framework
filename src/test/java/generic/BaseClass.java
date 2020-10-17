@@ -2,6 +2,12 @@ package generic;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.EmailAttachment;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.MultiPartEmail;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -10,8 +16,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -31,9 +39,12 @@ public class BaseClass {
 	
 	public static ExtentTest test;
 	
+	public static ReadProperties pro=new ReadProperties();
+	
+	public static Logger logger=LogManager.getLogger(BaseClass.class);
+	
 	@BeforeSuite
-	public void setUp()
-	{
+	public void setUp(){
 		reporter=new ExtentHtmlReporter(System.getProperty("user.dir")+"/Reports/ExtentReports.html");
 		reporter.config().setDocumentTitle("Automation report");
 		reporter.config().setReportName("Test Report");		
@@ -50,13 +61,12 @@ public class BaseClass {
 	}
 	
 	@BeforeClass
-	public void setBrowser(String browser)
-	{
+	@Parameters("browser")
+	public void setBrowser(String browser){
 		if (browser.equalsIgnoreCase("chrome")) {
 			driver=new ChromeDriver();
 		} 
-		else if(browser.equalsIgnoreCase("firefox"))
-		{
+		else if(browser.equalsIgnoreCase("firefox")){
 			driver=new FirefoxDriver();
 		}
 		else if (browser.equalsIgnoreCase("edge")) {
@@ -66,12 +76,11 @@ public class BaseClass {
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get("URL");
+		driver.get(pro.getUrl());
 	}
 	
 	@AfterMethod
-	public void result(ITestResult result)
-	{
+	public void result(ITestResult result){
 		if (result.getStatus()==ITestResult.SUCCESS) {
 			test.createNode(result.getName());
 			test.log(Status.PASS, "The test case"+result.getName()+"is pass");
@@ -89,8 +98,56 @@ public class BaseClass {
 	}
 	
 	@AfterClass
-	public void closeBrowser()
-	{
+	public void closeBrowser(){
 		driver.close();
 	}
+	
+	@AfterSuite
+	public void reportMail()
+	{
+		extent.flush();
+		
+		EmailAttachment attachement=new EmailAttachment();
+		attachement.setPath(System.getProperty("user.dir")+"/Reports/ExtentReports.html");
+		attachement.setDisposition(EmailAttachment.ATTACHMENT);
+		
+		MultiPartEmail email=new MultiPartEmail();
+		email.setHostName(pro.getHostName());
+		email.setSmtpPort(456);
+		email.setAuthenticator(new DefaultAuthenticator(pro.getReportMail(), pro.getReportPassword()));
+		email.setSSLOnConnect(true);
+		try {
+			email.addTo(pro.getToMail());
+			email.setFrom(pro.getFromMail());
+			email.setMsg(pro.getReportMsg());
+			email.setSubject(pro.getReportMsg());
+			email.attach(attachement);
+			email.send();
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
