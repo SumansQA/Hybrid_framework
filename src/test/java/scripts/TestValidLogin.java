@@ -8,6 +8,12 @@ import com.aventstack.extentreports.Status;
 import generic.BaseClass;
 import pages.LoginPage;
 
+/**
+ * 
+ * @author suman
+ *
+ */
+
 public class TestValidLogin extends BaseClass{
 	
 	@Test
