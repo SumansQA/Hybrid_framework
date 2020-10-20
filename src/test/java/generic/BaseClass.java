@@ -23,6 +23,7 @@ import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -90,7 +91,7 @@ public class BaseClass {
 			test.createNode(result.getName());
 			test.log(Status.FAIL, "The test case"+result.getName()+"is failed");
 			test.addScreenCaptureFromBase64String(Utilities.captureScreenShot(driver));
-		}
+			}
 		else if (result.getStatus()==ITestResult.SKIP) {
 			test.createNode(result.getName());
 			test.log(Status.SKIP, "The test case"+result.getName()+"is skipped");
