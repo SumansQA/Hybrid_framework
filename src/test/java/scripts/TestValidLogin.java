@@ -25,7 +25,7 @@ public class TestValidLogin extends BaseClass{
 		test.log(Status.INFO, "Username entered");
 		lp.enterPassword(pro.getPassword());
 		test.log(Status.INFO, "Password entered successfully");	
-		test.log(Status.INFO, "Logged n successfully");	
 		Assert.assertEquals(lp.getMyAccountText(driver), pro.getMyAccount());
+		test.log(Status.INFO, "Logged in successfully");	
 	}
 }

@@ -11,8 +11,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -23,7 +26,6 @@ import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
@@ -62,18 +64,22 @@ public class BaseClass {
 	}
 	
 	@BeforeClass
-	@Parameters("browser")
-	public void setBrowser(String browser){
-		if (browser.equalsIgnoreCase("chrome")) {
-			driver=new ChromeDriver();
-		} 
-		else if(browser.equalsIgnoreCase("firefox")){
-			driver=new FirefoxDriver();
-		}
-		else if (browser.equalsIgnoreCase("edge")) {
-			driver=new EdgeDriver();
+//	@Parameters("browser")
+	public void setBrowser(){
+		ChromeOptions options = new ChromeOptions();
+		FirefoxOptions foptions=new FirefoxOptions();
+//		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
+//		foptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
+	//	if (browser.equalsIgnoreCase("chrome")) {
+			driver=new ChromeDriver(options);
+	//	} 
+	//	else if(browser.equalsIgnoreCase("firefox")){
+	//		driver=new FirefoxDriver();
+	//	}
+		//else if (browser.equalsIgnoreCase("edge")) {
+	//		driver=new EdgeDriver();
 			
-		}
+	//	}
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -100,7 +106,7 @@ public class BaseClass {
 	
 	@AfterClass
 	public void closeBrowser(){
-		driver.close();
+	//	driver.close();
 	}
 	
 	@AfterSuite
@@ -127,28 +133,5 @@ public class BaseClass {
 		} catch (EmailException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

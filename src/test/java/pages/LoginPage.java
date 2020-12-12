@@ -45,11 +45,13 @@ public class LoginPage {
 	
 	public void enterUserName(String username)
 	{
+		usernameTextField.clear();
 		usernameTextField.sendKeys(username);
 	}
 	
 	public void enterPassword(String password)
 	{
+		passwordTextField.clear();
 		passwordTextField.sendKeys(password,Keys.ENTER);
 	}
 	
