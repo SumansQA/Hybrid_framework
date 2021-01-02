@@ -67,7 +67,12 @@ public class BaseClass {
 //	@Parameters("browser")
 	public void setBrowser(){
 		ChromeOptions options = new ChromeOptions();
-		FirefoxOptions foptions=new FirefoxOptions();
+		options.addArguments("start-maximized"); 
+		options.addArguments("disable-infobars"); 
+		options.addArguments("--disable-extensions"); 
+		options.addArguments("--disable-gpu"); // applicable to windows os only
+		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+		options.addArguments("--no-sandbox"); // Bypass OS security model
 //		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 //		foptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 	//	if (browser.equalsIgnoreCase("chrome")) {
