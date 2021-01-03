@@ -65,12 +65,8 @@ public class BaseClass {
 	@BeforeClass
 	//	@Parameters("browser")
 	public void setBrowser(){
-		String downloadFilepath = System.getProperty("downloadFilepath");
-		HashMap<String, Object> chromePrefs = new HashMap<>();
-		chromePrefs.put("profile.default_content_settings.popups", 0);
-		chromePrefs.put("download.default_directory", downloadFilepath);
+		
 		ChromeOptions options = new ChromeOptions();
-		options.setExperimentalOption("prefs", chromePrefs);
 		options.addArguments("start-maximized"); 
 		options.addArguments("disable-infobars"); 
 		options.addArguments("--disable-extensions"); 
@@ -78,7 +74,6 @@ public class BaseClass {
 		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
 		options.addArguments("--no-sandbox"); // Bypass OS security model
 		options.addArguments("--headless");
-		options.addArguments("--window-size=1920x1080");
 		//		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 		//		foptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 		//	if (browser.equalsIgnoreCase("chrome")) {
