@@ -43,9 +43,7 @@ public class BaseClass {
 	public static ExtentTest test;
 	
 	public static ReadProperties pro=new ReadProperties();
-	
-	public static Logger logger=LogManager.getLogger(BaseClass.class);
-	
+		
 	@BeforeSuite
 	public void setUp(){
 		reporter=new ExtentHtmlReporter(System.getProperty("user.dir")+"/Reports/ExtentReports.html");
