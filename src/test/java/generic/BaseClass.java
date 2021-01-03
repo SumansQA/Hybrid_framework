@@ -61,7 +61,7 @@ public class BaseClass {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
 		options.addArguments("--no-sandbox"); // Bypass OS security model
-//		options.addArguments("--headless");
+		options.addArguments("--headless");
 		//	if (browser.equalsIgnoreCase("chrome")) {
 		driver=new ChromeDriver(options);
 		//	} 
