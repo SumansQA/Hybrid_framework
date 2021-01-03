@@ -1,29 +1,21 @@
 package generic;
 
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -43,8 +35,8 @@ public class BaseClass {
 
 	public static ExtentTest test;
 
-	public static ReadProperties pro=new ReadProperties();
-
+	public ReadProperties pro=new ReadProperties();
+	
 	@BeforeSuite
 	public void setUp(){
 		reporter=new ExtentHtmlReporter(System.getProperty("user.dir")+"/Reports/ExtentReports.html");
@@ -65,18 +57,11 @@ public class BaseClass {
 	@BeforeClass
 	//	@Parameters("browser")
 	public void setBrowser(){
-		
+
 		ChromeOptions options = new ChromeOptions();
-//		options.addArguments("start-maximized"); 
-//		options.addArguments("disable-infobars"); 
-//		options.addArguments("--disable-extensions"); 
-//		options.addArguments("--disable-gpu"); // applicable to windows os only
 		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
 		options.addArguments("--no-sandbox"); // Bypass OS security model
-		options.addArguments("--headless");
-		options.addArguments("--window-size=1920x1080");
-		//		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
-		//		foptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
+//		options.addArguments("--headless");
 		//	if (browser.equalsIgnoreCase("chrome")) {
 		driver=new ChromeDriver(options);
 		//	} 
@@ -113,7 +98,7 @@ public class BaseClass {
 
 	@AfterClass
 	public void closeBrowser(){
-		//	driver.close();
+		driver.close();
 	}
 
 	@AfterSuite
