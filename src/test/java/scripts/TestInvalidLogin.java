@@ -30,7 +30,6 @@ public class TestInvalidLogin extends BaseClass {
 	public String[][] testData()
 	{
 		String[][] testData = Utilities.getExcelData(System.getProperty("user.dir")+"/src/test/resources/input.xlsx", "InvalidData");
-		System.out.println(testData);
 		return testData;		
 	}
 }
