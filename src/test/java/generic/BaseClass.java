@@ -50,13 +50,15 @@ public class BaseClass {
 		reporter.config().setDocumentTitle("Automation report");
 		reporter.config().setReportName("Test Report");		
 		reporter.config().setTheme(Theme.DARK);
-		
+	
 		extent=new ExtentReports();
 		extent.attachReporter(reporter);
 		reporter.loadXMLConfig(System.getProperty("user.dir")+"/Extent-Config.xml");
 		
 		System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-		WebDriverManager.chromedriver().version("87.0.4280.88").setup();
+		
+		System.setProperty("webdriver.chrome.driver", "/home/suman/Pictures/chromedriver_linux64/chromedriver");
+//		WebDriverManager.chromedriver().version("87.0.4280.88").setup();
 		WebDriverManager.firefoxdriver().setup();
 		WebDriverManager.edgedriver().setup();
 	}
@@ -74,10 +76,10 @@ public class BaseClass {
 //		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 //		foptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 	//	if (browser.equalsIgnoreCase("chrome")) {
-		//	driver=new ChromeDriver(options);
+			driver=new ChromeDriver(options);
 	//	} 
 	//	else if(browser.equalsIgnoreCase("firefox")){
-			driver=new FirefoxDriver();
+	//		driver=new FirefoxDriver();
 	//	}
 		//else if (browser.equalsIgnoreCase("edge")) {
 	//		driver=new EdgeDriver();
