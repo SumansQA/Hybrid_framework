@@ -5,7 +5,7 @@
 <!--   <parameter name="browser" value="chrome"></parameter>
  -->    <classes>
       <class name="scripts.TestValidLogin"/>
-      <class name="scripts.TestInvalidLogin"></class>
-    </classes>
+<!--       <class name="scripts.TestInvalidLogin"></class>
+ -->    </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
