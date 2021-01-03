@@ -74,10 +74,10 @@ public class BaseClass {
 //		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 //		foptions.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");
 	//	if (browser.equalsIgnoreCase("chrome")) {
-			driver=new ChromeDriver(options);
+		//	driver=new ChromeDriver(options);
 	//	} 
 	//	else if(browser.equalsIgnoreCase("firefox")){
-	//		driver=new FirefoxDriver();
+			driver=new FirefoxDriver();
 	//	}
 		//else if (browser.equalsIgnoreCase("edge")) {
 	//		driver=new EdgeDriver();
