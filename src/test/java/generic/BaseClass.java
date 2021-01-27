@@ -1,5 +1,6 @@
 package generic;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -49,7 +50,8 @@ public class BaseClass {
 		reporter.loadXMLConfig(System.getProperty("user.dir")+"/Extent-Config.xml");
 
 		System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-		WebDriverManager.chromedriver().version("87.0.4280.88").setup();
+	//	WebDriverManager.chromedriver().version("87.0.4280.88").setup();
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/driver/chromedriver");
 		WebDriverManager.firefoxdriver().setup();
 		WebDriverManager.edgedriver().setup();
 	}
@@ -62,6 +64,8 @@ public class BaseClass {
 		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
 		options.addArguments("--no-sandbox"); // Bypass OS security model
 		options.addArguments("--headless");
+	//	options.setBinary(new File(System.getProperty("user.dir")+"/driver/chromedriver"));
+		options.setBinary(System.getProperty("user.dir")+"/driver/chromedriver");
 		//	if (browser.equalsIgnoreCase("chrome")) {
 		driver=new ChromeDriver(options);
 		//	} 
